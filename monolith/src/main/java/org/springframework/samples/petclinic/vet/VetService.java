@@ -16,7 +16,7 @@ public class VetService {
         this.vets = vets;
     }
 
-    public Collection<Vet> allVets() {
+    public Collection<? extends VetListView> allVets() {
         return this.vets.findAll();
     }
 }

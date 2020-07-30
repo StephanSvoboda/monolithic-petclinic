@@ -39,15 +39,15 @@ class VetServiceTests {
 
     @Test
     void shouldFindVets() {
-        Collection<Vet> vets = service.allVets();
+        Collection<? extends VetListView> vets = service.allVets();
 
         assertThat(vets)
-                .filteredOn(vet -> vet.getId() == 3)
+                .filteredOn(vet -> ((Vet) vet).getId() == 3)
                 .hasSize(1)
                 .first()
                 .hasFieldOrPropertyWithValue("lastName", "Douglas")
                 .hasFieldOrPropertyWithValue("nrOfSpecialties", 2)
-                .extracting(Vet::getSpecialties).asList()
+                .extracting(VetListView::getSpecialties).asList()
                 .extracting("name")
                 .containsExactly("dentistry", "surgery");
     }

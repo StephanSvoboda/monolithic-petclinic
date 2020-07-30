@@ -26,7 +26,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "specialties")
-public class Specialty implements Serializable {
+public class Specialty implements Serializable, SpecialityListView {
 
     @Column(name = "name")
     private String name;
@@ -34,6 +34,7 @@ public class Specialty implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Override
     public String getName() {
         return this.name;
     }

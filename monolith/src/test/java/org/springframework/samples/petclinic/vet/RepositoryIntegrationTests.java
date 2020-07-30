@@ -31,7 +31,7 @@ class RepositoryIntegrationTests {
 
     @Test
     void testFindVets() {
-        Collection<Vet> all = vetsRepository.findAll();
+        Collection<? extends VetListView> all = vetsRepository.findAll();
         assertThat(all).hasSize(6);
     }
 }

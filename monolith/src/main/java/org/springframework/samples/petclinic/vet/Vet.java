@@ -36,7 +36,7 @@ import org.springframework.beans.support.PropertyComparator;
  */
 @Entity
 @Table(name = "vets")
-public class Vet implements Serializable {
+public class Vet implements Serializable, VetListView {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
@@ -62,12 +62,14 @@ public class Vet implements Serializable {
         this.specialties = specialties;
     }
 
-    public List<Specialty> getSpecialties() {
+    @Override
+    public List<SpecialityListView> getSpecialties() {
         List<Specialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
         PropertyComparator.sort(sortedSpecs, new MutableSortDefinition("name", true, true));
         return Collections.unmodifiableList(sortedSpecs);
     }
 
+    @Override
     public int getNrOfSpecialties() {
         return getSpecialtiesInternal().size();
     }
@@ -76,6 +78,7 @@ public class Vet implements Serializable {
         getSpecialtiesInternal().add(specialty);
     }
 
+    @Override
     public String getFirstName() {
         return this.firstName;
     }
@@ -84,6 +87,7 @@ public class Vet implements Serializable {
         this.firstName = firstName;
     }
 
+    @Override
     public String getLastName() {
         return this.lastName;
     }

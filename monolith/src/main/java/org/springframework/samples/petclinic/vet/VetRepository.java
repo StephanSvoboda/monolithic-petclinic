@@ -39,7 +39,7 @@ public interface VetRepository extends Repository<Vet, Integer> {
      * @return a <code>Collection</code> of <code>Vet</code>s
      */
     @Transactional(readOnly = true)
-    Collection<Vet> findAll() throws DataAccessException;
+    Collection<? extends VetListView> findAll() throws DataAccessException;
 
 
 }
